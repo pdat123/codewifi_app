@@ -1,4 +1,3 @@
-
 #ifndef _Application_atApp_Wifi_
 #define _Application_atApp_Wifi_
 /* _____PROJECT INCLUDES____________________________________________________ */
@@ -63,7 +62,7 @@ App_Wifi::~App_Wifi()
  */
 void  App_Wifi::App_Wifi_Pend()
 {
-    // atService_Wifi.Debug();
+    atService_Wifi.Debug();
 }
 /**
  * This start function will init some critical function 
@@ -73,12 +72,12 @@ void  App_Wifi::App_Wifi_Start()
 	// init atWifi Service in the fist running time
 	// atService_Wifi.Run_Service();
 		WiFi.mode(WIFI_STA);
-		WiFi.disconnect(true);
+		atService_Wifi.disconnectowifi();
 		Serial.begin(115200);
   		Serial.println("Setup done");
-  		scanwifi();
+  		atService_Wifi.scanwifi();
   		delay(1000);
-  		conncettowifi();
+  		atService_Wifi.conncettowifi();
 }  
 /**
  * Restart function of SNM  app
@@ -102,15 +101,17 @@ void  App_Wifi::App_Wifi_Execute()
     		command.trim();
     		if (command == "disconnect" || command == "Disconnect")
     		{
-      			disconnectowifi();
+      			atService_Wifi.disconnectowifi();
+				Serial.print("Disconnect to wifi");
       			unsigned long c = millis();
+
       			while (millis() - c < 3000)
       			{
         			Serial.print(".");
         			delay(1000);
       			}
       			Serial.println("");
-      			conncettowifi();
+      			atService_Wifi.conncettowifi();
     		}
   		}
     }   

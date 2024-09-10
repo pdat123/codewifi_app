@@ -23,6 +23,10 @@ class Service_Wifi : public Service
 public:
     Service_Wifi();
     ~Service_Wifi();
+
+    static void scanwifi();
+    static void conncettowifi();
+    static void disconnectowifi();
     
 protected:
      
@@ -73,7 +77,7 @@ void  Service_Wifi::Service_Wifi_Execute()
 }    
 void  Service_Wifi::Service_Wifi_End(){}
 
-void scanwifi(){
+void Service_Wifi::scanwifi(){
   int a = WiFi.scanNetworks();
   if (a == 0)
   {
@@ -90,7 +94,7 @@ void scanwifi(){
   }  
 }
 
-void conncettowifi()
+void Service_Wifi::conncettowifi()
 {
   //enter the wifi name
   bool invalidSSID = true;
@@ -158,10 +162,9 @@ void conncettowifi()
   }
 }
 
-void disconnectowifi()
+void Service_Wifi::disconnectowifi()
 {
   WiFi.disconnect(true);
-  Serial.print("Disconnect to wifi");
 }
 
 #endif
